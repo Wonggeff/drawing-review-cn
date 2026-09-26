@@ -1,0 +1,11 @@
+# 依赖
+pymupdf>=1.24        # PDF 渲染、文字提取、图像裁剪（必需）
+openpyxl>=3.1        # 生成 Excel 会审记录表（必需，make_docs.py）
+python-docx>=1.1     # 生成 Word 会审记录表（必需，make_docs.py）
+
+# 可选但强烈建议：pixdiff.py / dupfind.py 的差异计算会快一个数量级
+numpy>=1.24
+
+# 可选（仅 DWG 全量文字提取需要）
+#   - AutoCAD（含 accoreconsole.exe）
+#   - PowerShell 7 (pwsh)

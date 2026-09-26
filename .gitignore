@@ -1,0 +1,44 @@
+# ---- 本地配置（含项目路径/项目名，绝对不要提交） ----
+# 注意：.gitignore 不支持行尾注释，注释必须单独成行，否则整行会被当成匹配模式而失效。
+sensitive.txt
+sensitive-*.txt
+config.json
+config.local.json
+
+# ---- 运行产物 ----
+_render/
+_render_ext/
+_extract/
+_dwgtext/
+_findings/
+_ledger/
+_tmp/
+_merged.md
+_merged.csv
+
+# ---- 交付物（按需取消注释，如果你想连交付物一起版本化） ----
+# 0*_图纸会审*.md
+# 0*_各专业问题明细清单.md
+# 0*_图纸会审记录表.xlsx
+# 0*_图纸会审记录表.docx
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+
+# ---- 编辑器 / 系统 ----
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+
+# ---- 图纸本体（体积大，通常不入库） ----
+drawings/
+*.dwg
+*.dxf
+*.pdf

@@ -1,0 +1,43 @@
+(defun dumptext (outp / f e ed ty n s x)
+ (setq f (open outp "w"))
+ (write-line (strcat "DWGNAME|" (getvar "DWGNAME")) f)
+ (setq e (entnext) n 0)
+ (while e
+  (setq ed (entget e))
+  (if ed
+   (progn
+    (setq ty (cdr (assoc 0 ed)))
+    (cond
+     ((= ty "TEXT")
+      (write-line (strcat "TEXT|" (if (cdr (assoc 8 ed)) (cdr (assoc 8 ed)) "") "|" (vl-princ-to-string (cdr (assoc 10 ed))) "|" (if (cdr (assoc 1 ed)) (cdr (assoc 1 ed)) "")) f)
+      (setq n (1+ n)))
+     ((= ty "MTEXT")
+      (progn
+       (setq s "")
+       (foreach x ed (if (= (car x) 3) (setq s (strcat s (cdr x)))))
+       (setq s (strcat s (if (cdr (assoc 1 ed)) (cdr (assoc 1 ed)) "")))
+       (write-line (strcat "MTEXT|" (if (cdr (assoc 8 ed)) (cdr (assoc 8 ed)) "") "|" (vl-princ-to-string (cdr (assoc 10 ed))) "|" s) f)
+       (setq n (1+ n))))
+     ((= ty "DIMENSION")
+      (progn
+       (write-line (strcat "DIM|" (if (cdr (assoc 8 ed)) (cdr (assoc 8 ed)) "") "|" (vl-princ-to-string (cdr (assoc 10 ed))) "|" (vl-princ-to-string (cdr (assoc 42 ed)))) f)
+       (setq n (1+ n))))
+     ((= ty "ATTRIB")
+      (progn
+       (write-line (strcat "ATTRIB|" (if (cdr (assoc 2 ed)) (cdr (assoc 2 ed)) "") "|" (if (cdr (assoc 1 ed)) (cdr (assoc 1 ed)) "")) f)
+       (setq n (1+ n))))
+     ((= ty "INSERT")
+      (write-line (strcat "INSERT|" (if (cdr (assoc 2 ed)) (cdr (assoc 2 ed)) "") "|" (if (cdr (assoc 8 ed)) (cdr (assoc 8 ed)) "") "|" (vl-princ-to-string (cdr (assoc 10 ed)))) f))
+     ((= ty "BLOCK")
+      (write-line (strcat "===BLOCK|" (if (cdr (assoc 2 ed)) (cdr (assoc 2 ed)) "")) f))
+    )
+   )
+  )
+  (setq e (entnext e))
+ )
+ (close f)
+ (princ (strcat "\nTEXT_COUNT=" (itoa n)))
+ (princ)
+)
+(princ "\ndump.lsp loaded")
+(princ)

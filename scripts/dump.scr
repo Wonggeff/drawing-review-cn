@@ -1,0 +1,16 @@
+; AutoCAD Core Console 脚本模板
+; 实际使用时由 batch_dump2.ps1 为每个进程生成独立副本（含各自路径）；
+; 手动运行时请把占位符改成你的目录：
+;   <LSP_DIR> —— dump.lsp 所在目录
+;   <OUT_DIR> —— 文字输出目录
+;
+; 用法：
+;   accoreconsole.exe /i "图纸.dwg" /s "dump.scr"
+;
+; 注意：SECURELOAD 必须置 0，否则 LISP 加载会被安全策略拒绝
+;       （典型报错：no function definition: DUMPTEXT）。
+
+SECURELOAD
+0
+(load "<LSP_DIR>/dump.lsp")
+(dumptext "<OUT_DIR>/cur.txt")

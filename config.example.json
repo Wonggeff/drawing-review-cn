@@ -1,0 +1,45 @@
+{
+  "_用法": "复制为 config.json 后按实际情况填写。路径可写绝对路径，也可写相对本文件的相对路径。也可用环境变量覆盖，如 DRAWING_REVIEW_ROOT。所有 _ 开头的键仅作说明，程序会忽略。",
+
+  "_1_路径": "—— 目录配置 ——",
+  "drawing_root": "./drawings",
+  "dup_subdir": "",
+  "render_dir": "./_render",
+  "extract_dir": "./_extract",
+  "dwgtext_dir": "./_dwgtext",
+  "findings_dir": "./_findings",
+  "ledger_dir": "./_ledger",
+  "ext_dir": "./_render_ext",
+  "out_dir": ".",
+
+  "_2_说明": "drawing_root=施工图根目录（内含各专业分册，PDF/DWG 都在这里）；dup_subdir=需跳过的重复归档子目录名（相对 drawing_root，可留空）；findings_dir=各分册问题报告目录；out_dir=交付物输出目录",
+
+  "_3_交付物": "—— 交付物 ——",
+  "main_issue_md": "02_图纸会审问题清单.md",
+
+  "_4_工程信息": "—— 写入 Word/Excel 会审记录表的工程信息 ——",
+  "project_name": "（请填写工程名称）",
+  "project_location": "（请填写建设地点）",
+  "client": "（请填写建设单位）",
+  "designer": "（请填写设计单位）",
+  "surveyor": "（请填写勘察单位）",
+  "reviewer": "（请填写施工图审查机构）",
+
+  "_5_分册命名": "—— 可选：分册代号 → 显示名（不填则显示“建筑·分册一/二/三…”）——",
+  "cluster_names": {
+    "A01": "建筑（通用说明·总图）",
+    "A02": "建筑（主入口庭院）",
+    "A03": "建筑（主楼·展堂）"
+  },
+
+  "_6_专业识别": "—— 可选：目录名关键词 → 专业名（供 ledger.py 用；不填则用内置通用关键词表：建筑/结构/给排水/电气/暖通/景观/装修/基坑/节能/智能化/海绵）——",
+  "discipline_rules": {
+    "我的分册关键词": "建筑"
+  },
+
+  "_7_发布自检": "—— 可选：发布前自检敏感词（供 scripts/prescan.py 用）。等价做法：在仓库根写 sensitive.txt，每行一个词，# 为注释，该文件已 gitignore ——",
+  "sensitive_patterns": [
+    "某某文旅项目",
+    "某某设计研究院"
+  ]
+}
